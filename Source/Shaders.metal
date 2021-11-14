@@ -1,3 +1,4 @@
+// Copyright (c) 2021 caughtbyatoe
 //
 //  Shaders.metal
 //  Sample0

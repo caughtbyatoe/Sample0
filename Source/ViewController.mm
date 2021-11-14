@@ -1,3 +1,4 @@
+// Copyright (c) 2021 caughtbyatoe
 //
 //  ViewController.mm
 //  Sample0

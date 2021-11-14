@@ -1,3 +1,4 @@
+// Copyright (c) 2021 caughtbyatoe
 //
 //  main.m
 //  Sample0
