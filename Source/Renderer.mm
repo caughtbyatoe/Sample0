@@ -103,37 +103,6 @@ using simd::float4x4;
         
         // Load a scene
         [self loadScene];
-//        // We render using vert colors and triangle soup
-//        _scene = getDefaultScene();
-//        size_t numTris = 0;
-//        for (QuadMesh& mesh : _scene.meshes) {
-//            numTris += mesh.faces.size() * 2;
-//        }
-//        _triangleVertexBuffer.reserve(numTris);
-//        for (QuadMesh& mesh : _scene.meshes) {
-//            for (Face& face : mesh.faces) {
-//                const VertexPosition p0 = mesh.vertTbl[face.p0];
-//                const VertexPosition p1 = mesh.vertTbl[face.p1];
-//                const VertexPosition p2 = mesh.vertTbl[face.p2];
-//                const VertexPosition p3 = mesh.vertTbl[face.p3];
-//                const VertexColor c0 = mesh.vertClr[face.p0];
-//                const VertexColor c1 = mesh.vertClr[face.p1];
-//                const VertexColor c2 = mesh.vertClr[face.p2];
-//                const VertexColor c3 = mesh.vertClr[face.p3];
-//                const Vertex v0 = { { p0.x, p0.y, p0.z}, { c0.r, c0.g, c0.b, 1.0 } };
-//                const Vertex v1 = { { p1.x, p1.y, p1.z}, { c1.r, c1.g, c1.b, 1.0 } };
-//                const Vertex v2 = { { p2.x, p2.y, p2.z}, { c2.r, c2.g, c2.b, 1.0 } };
-//                const Vertex v3 = { { p3.x, p3.y, p3.z}, { c3.r, c3.g, c3.b, 1.0 } };
-//                // tri 1
-//                _triangleVertexBuffer.push_back(v0);
-//                _triangleVertexBuffer.push_back(v1);
-//                _triangleVertexBuffer.push_back(v3);
-//                // tri 2
-//                _triangleVertexBuffer.push_back(v3);
-//                _triangleVertexBuffer.push_back(v1);
-//                _triangleVertexBuffer.push_back(v2);
-//            }
-//        }
     }
     return self;
 }
