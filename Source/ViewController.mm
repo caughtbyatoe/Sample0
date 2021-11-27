@@ -7,7 +7,10 @@
 
 #include "ViewController.h"
 
+#if TARGET_OS_OSX
 #include "ImGui/imgui_impl_osx.h"
+#endif
+#include "ImGui/imgui.h"
 #include "Renderer.h"
 
 #include <MetalKit/MetalKit.h>
@@ -29,7 +32,8 @@
     NSAssert(_renderer, @"Renderer failed initialization");
     [_renderer mtkView:_view drawableSizeWillChange:_view.drawableSize];
     _view.delegate = _renderer;
-    
+
+#if TARGET_OS_OSX
     // Add a tracking area in order to receive mouse events whenever the mouse is within the bounds of our view
     NSTrackingArea *trackingArea = [[NSTrackingArea alloc] initWithRect:NSZeroRect
                                                                 options:NSTrackingMouseMoved | NSTrackingInVisibleRect | NSTrackingActiveAlways
@@ -50,8 +54,10 @@
     }];
 
     ImGui_ImplOSX_Init();
+#endif
 }
 
+#if TARGET_OS_OSX
 - (void)setRepresentedObject:(id)representedObject
 {
     [super setRepresentedObject:representedObject];
@@ -111,4 +117,51 @@
 {
     ImGui_ImplOSX_HandleEvent(event, self.view);
 }
+
+#else
+// This touch mapping is super cheesy/hacky. We treat any touch on the screen
+// as if it were a depressed left mouse button, and we don't bother handling
+// multitouch correctly at all. This causes the "cursor" to behave very erratically
+// when there are multiple active touches. But for demo purposes, single-touch
+// interaction actually works surprisingly well.
+- (void)updateIOWithTouchEvent:(UIEvent *)event
+{
+    UITouch *anyTouch = event.allTouches.anyObject;
+    CGPoint touchLocation = [anyTouch locationInView:self.view];
+    ImGuiIO &io = ImGui::GetIO();
+    io.MousePos = ImVec2(touchLocation.x, touchLocation.y);
+
+    BOOL hasActiveTouch = NO;
+    for (UITouch *touch in event.allTouches)
+    {
+        if (touch.phase != UITouchPhaseEnded && touch.phase != UITouchPhaseCancelled)
+        {
+            hasActiveTouch = YES;
+            break;
+        }
+    }
+    io.MouseDown[0] = hasActiveTouch;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self updateIOWithTouchEvent:event];
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self updateIOWithTouchEvent:event];
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self updateIOWithTouchEvent:event];
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self updateIOWithTouchEvent:event];
+}
+
+#endif
 @end

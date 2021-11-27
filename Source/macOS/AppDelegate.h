@@ -1,8 +1,10 @@
 // Copyright (c) 2021 caughtbyatoe
 //
 //  AppDelegate.h
-//  Sample0
+//  Sample0_macOS
 //
+
+#pragma once
 
 #include <Cocoa/Cocoa.h>
 

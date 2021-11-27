@@ -172,10 +172,14 @@ static float4x4 computeModelMatrix(const float *tran, const float *rot, const fl
     ImGuiIO& io = ImGui::GetIO();
     io.DisplaySize.x = view.bounds.size.width;
     io.DisplaySize.y = view.bounds.size.height;
+#if TARGET_OS_OSX
     CGFloat framebufferScale = view.window.screen.backingScaleFactor ?: NSScreen.mainScreen.backingScaleFactor;
+#else
+    CGFloat framebufferScale = view.window.screen.scale ?: UIScreen.mainScreen.scale;
+#endif
     io.DisplayFramebufferScale = ImVec2(framebufferScale, framebufferScale);
     io.DeltaTime = 1 / float(view.preferredFramesPerSecond ?: 60);
-
+    
     id<MTLCommandBuffer> commandBuffer = [_commandQueue commandBuffer];
 
     static float clear_color[4] = { 0.28f, 0.36f, 0.5f, 1.0f };
@@ -220,7 +224,7 @@ static float4x4 computeModelMatrix(const float *tran, const float *rot, const fl
     // NOTE: near and far are expressed in NDC coordinates
     const double width  = view.bounds.size.width;
     const double height = view.bounds.size.height;
-    [renderEncoder setViewport:(MTLViewport) { 0.0, 0.0, width, height, 0.0, 1.0 }];
+    [renderEncoder setViewport:(MTLViewport) { 0.0, 0.0, framebufferScale * width, framebufferScale * height, 0.0, 1.0 }];
     
     [renderEncoder setRenderPipelineState:_pipeline];
     [renderEncoder setDepthStencilState:_depthState];
@@ -253,7 +257,9 @@ static float4x4 computeModelMatrix(const float *tran, const float *rot, const fl
 
     // Draw the Gui
     ImGui_ImplMetal_NewFrame(renderPassDescriptor);
+#if TARGET_OS_OSX
     ImGui_ImplOSX_NewFrame(view);
+#endif
     ImGui::NewFrame();
     ImGuizmo::BeginFrame();
     ImGuizmo::SetOrthographic(false);

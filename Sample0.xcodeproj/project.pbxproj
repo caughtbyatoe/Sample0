@@ -13,6 +13,24 @@
 		D322CEAD27407B2B001F4F96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D322CEAB27407B2B001F4F96 /* Main.storyboard */; };
 		D322CEAF27407B2B001F4F96 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D322CEAE27407B2B001F4F96 /* main.m */; };
 		D322CEB827407B7D001F4F96 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D322CEB727407B7D001F4F96 /* MetalKit.framework */; platformFilter = maccatalyst; };
+		D354AD432751ACD500B9A546 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D354AD422751ACD500B9A546 /* AppDelegate.m */; };
+		D354AD462751ACD500B9A546 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D354AD452751ACD500B9A546 /* SceneDelegate.m */; };
+		D354AD4C2751ACD500B9A546 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D354AD4A2751ACD500B9A546 /* Main.storyboard */; };
+		D354AD4E2751ACD600B9A546 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D354AD4D2751ACD600B9A546 /* Assets.xcassets */; };
+		D354AD512751ACD600B9A546 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D354AD4F2751ACD600B9A546 /* LaunchScreen.storyboard */; };
+		D354AD542751ACD600B9A546 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D354AD532751ACD600B9A546 /* main.m */; };
+		D354AD592751AF6B00B9A546 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D354AD582751AF6B00B9A546 /* MetalKit.framework */; };
+		D354AD5B2751B9D100B9A546 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D322CEA727407B2A001F4F96 /* ViewController.mm */; };
+		D354AD5C2751B9EF00B9A546 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D58352274098E700A18526 /* imgui_demo.cpp */; };
+		D354AD5D2751B9EF00B9A546 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D5834B274098E700A18526 /* imgui_draw.cpp */; };
+		D354AD5E2751B9F800B9A546 /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = D3D58350274098E700A18526 /* imgui_impl_metal.mm */; };
+		D354AD5F2751BA0300B9A546 /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D58354274098E700A18526 /* imgui_tables.cpp */; };
+		D354AD602751BA0300B9A546 /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D5834E274098E700A18526 /* imgui_widgets.cpp */; };
+		D354AD612751BA0300B9A546 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D58355274098E700A18526 /* imgui.cpp */; };
+		D354AD622751BA0B00B9A546 /* ImGuizmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D58356274098E700A18526 /* ImGuizmo.cpp */; };
+		D354AD632751BA1A00B9A546 /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D3D58343274080F400A18526 /* Renderer.mm */; };
+		D354AD642751BA2200B9A546 /* Scene.cc in Sources */ = {isa = PBXBuildFile; fileRef = D3D5836C2740A80500A18526 /* Scene.cc */; };
+		D354AD652751BA2A00B9A546 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = D3D58345274083F300A18526 /* Shaders.metal */; };
 		D3D58344274080F400A18526 /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D3D58343274080F400A18526 /* Renderer.mm */; };
 		D3D58346274083F300A18526 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = D3D58345274083F300A18526 /* Shaders.metal */; };
 		D3D5835A274098E700A18526 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D5834B274098E700A18526 /* imgui_draw.cpp */; };
@@ -27,7 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D322CEA027407B2A001F4F96 /* Sample0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D322CEA027407B2A001F4F96 /* Sample0_macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample0_macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D322CEA327407B2A001F4F96 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D322CEA427407B2A001F4F96 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		D322CEA627407B2A001F4F96 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -37,6 +55,17 @@
 		D322CEAE27407B2B001F4F96 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D322CEB027407B2B001F4F96 /* Sample0.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sample0.entitlements; sourceTree = "<group>"; };
 		D322CEB727407B7D001F4F96 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		D354AD3F2751ACD500B9A546 /* Sample0_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample0_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D354AD412751ACD500B9A546 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D354AD422751ACD500B9A546 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D354AD442751ACD500B9A546 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		D354AD452751ACD500B9A546 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		D354AD4B2751ACD500B9A546 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D354AD4D2751ACD600B9A546 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D354AD502751ACD600B9A546 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D354AD522751ACD600B9A546 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D354AD532751ACD600B9A546 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D354AD582751AF6B00B9A546 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
 		D3D583422740807A00A18526 /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		D3D58343274080F400A18526 /* Renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
 		D3D58345274083F300A18526 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
@@ -71,6 +100,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D354AD3C2751ACD500B9A546 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D354AD592751AF6B00B9A546 /* MetalKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -86,7 +123,8 @@
 		D322CEA127407B2A001F4F96 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D322CEA027407B2A001F4F96 /* Sample0.app */,
+				D322CEA027407B2A001F4F96 /* Sample0_macOS.app */,
+				D354AD3F2751ACD500B9A546 /* Sample0_iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,11 +132,9 @@
 		D322CEA227407B2A001F4F96 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D3D5836227409F6000A18526 /* UI */,
+				D354AD5A2751B11700B9A546 /* iOS */,
+				D3D5836227409F6000A18526 /* macOS */,
 				D3D583482740987800A18526 /* ImGui */,
-				D322CEA327407B2A001F4F96 /* AppDelegate.h */,
-				D322CEA427407B2A001F4F96 /* AppDelegate.mm */,
-				D322CEAE27407B2B001F4F96 /* main.m */,
 				D3D583422740807A00A18526 /* Renderer.h */,
 				D3D58343274080F400A18526 /* Renderer.mm */,
 				D3D583632740A1CB00A18526 /* Scene.h */,
@@ -107,7 +143,6 @@
 				D3D58345274083F300A18526 /* Shaders.metal */,
 				D322CEA627407B2A001F4F96 /* ViewController.h */,
 				D322CEA727407B2A001F4F96 /* ViewController.mm */,
-				D322CEB027407B2B001F4F96 /* Sample0.entitlements */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -115,9 +150,26 @@
 		D322CEB627407B7D001F4F96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D354AD582751AF6B00B9A546 /* MetalKit.framework */,
 				D322CEB727407B7D001F4F96 /* MetalKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D354AD5A2751B11700B9A546 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D354AD412751ACD500B9A546 /* AppDelegate.h */,
+				D354AD422751ACD500B9A546 /* AppDelegate.m */,
+				D354AD4D2751ACD600B9A546 /* Assets.xcassets */,
+				D354AD522751ACD600B9A546 /* Info.plist */,
+				D354AD4F2751ACD600B9A546 /* LaunchScreen.storyboard */,
+				D354AD4A2751ACD500B9A546 /* Main.storyboard */,
+				D354AD532751ACD600B9A546 /* main.m */,
+				D354AD442751ACD500B9A546 /* SceneDelegate.h */,
+				D354AD452751ACD500B9A546 /* SceneDelegate.m */,
+			);
+			path = iOS;
 			sourceTree = "<group>";
 		};
 		D3D583482740987800A18526 /* ImGui */ = {
@@ -144,21 +196,25 @@
 			path = ImGui;
 			sourceTree = "<group>";
 		};
-		D3D5836227409F6000A18526 /* UI */ = {
+		D3D5836227409F6000A18526 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				D322CEA327407B2A001F4F96 /* AppDelegate.h */,
+				D322CEA427407B2A001F4F96 /* AppDelegate.mm */,
+				D322CEAE27407B2B001F4F96 /* main.m */,
 				D322CEA927407B2B001F4F96 /* Assets.xcassets */,
 				D322CEAB27407B2B001F4F96 /* Main.storyboard */,
+				D322CEB027407B2B001F4F96 /* Sample0.entitlements */,
 			);
-			path = UI;
+			path = macOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D322CE9F27407B2A001F4F96 /* Sample0 */ = {
+		D322CE9F27407B2A001F4F96 /* Sample0_macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D322CEB327407B2B001F4F96 /* Build configuration list for PBXNativeTarget "Sample0" */;
+			buildConfigurationList = D322CEB327407B2B001F4F96 /* Build configuration list for PBXNativeTarget "Sample0_macOS" */;
 			buildPhases = (
 				D322CE9C27407B2A001F4F96 /* Sources */,
 				D322CE9D27407B2A001F4F96 /* Frameworks */,
@@ -168,9 +224,26 @@
 			);
 			dependencies = (
 			);
-			name = Sample0;
+			name = Sample0_macOS;
 			productName = Sample0;
-			productReference = D322CEA027407B2A001F4F96 /* Sample0.app */;
+			productReference = D322CEA027407B2A001F4F96 /* Sample0_macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D354AD3E2751ACD500B9A546 /* Sample0_iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D354AD552751ACD600B9A546 /* Build configuration list for PBXNativeTarget "Sample0_iOS" */;
+			buildPhases = (
+				D354AD3B2751ACD500B9A546 /* Sources */,
+				D354AD3C2751ACD500B9A546 /* Frameworks */,
+				D354AD3D2751ACD500B9A546 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sample0_iOS;
+			productName = Sample0_iOS;
+			productReference = D354AD3F2751ACD500B9A546 /* Sample0_iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -183,6 +256,9 @@
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					D322CE9F27407B2A001F4F96 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					D354AD3E2751ACD500B9A546 = {
 						CreatedOnToolsVersion = 13.1;
 					};
 				};
@@ -200,7 +276,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D322CE9F27407B2A001F4F96 /* Sample0 */,
+				D354AD3E2751ACD500B9A546 /* Sample0_iOS */,
+				D322CE9F27407B2A001F4F96 /* Sample0_macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -212,6 +289,16 @@
 			files = (
 				D322CEAA27407B2B001F4F96 /* Assets.xcassets in Resources */,
 				D322CEAD27407B2B001F4F96 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D354AD3D2751ACD500B9A546 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D354AD512751ACD600B9A546 /* LaunchScreen.storyboard in Resources */,
+				D354AD4E2751ACD600B9A546 /* Assets.xcassets in Resources */,
+				D354AD4C2751ACD500B9A546 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +326,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D354AD3B2751ACD500B9A546 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D354AD652751BA2A00B9A546 /* Shaders.metal in Sources */,
+				D354AD642751BA2200B9A546 /* Scene.cc in Sources */,
+				D354AD632751BA1A00B9A546 /* Renderer.mm in Sources */,
+				D354AD622751BA0B00B9A546 /* ImGuizmo.cpp in Sources */,
+				D354AD5F2751BA0300B9A546 /* imgui_tables.cpp in Sources */,
+				D354AD602751BA0300B9A546 /* imgui_widgets.cpp in Sources */,
+				D354AD612751BA0300B9A546 /* imgui.cpp in Sources */,
+				D354AD5E2751B9F800B9A546 /* imgui_impl_metal.mm in Sources */,
+				D354AD5C2751B9EF00B9A546 /* imgui_demo.cpp in Sources */,
+				D354AD5D2751B9EF00B9A546 /* imgui_draw.cpp in Sources */,
+				D354AD5B2751B9D100B9A546 /* ViewController.mm in Sources */,
+				D354AD432751ACD500B9A546 /* AppDelegate.m in Sources */,
+				D354AD542751ACD600B9A546 /* main.m in Sources */,
+				D354AD462751ACD500B9A546 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -248,6 +356,22 @@
 				D322CEAC27407B2B001F4F96 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D354AD4A2751ACD500B9A546 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D354AD4B2751ACD500B9A546 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D354AD4F2751ACD600B9A546 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D354AD502751ACD600B9A546 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -416,6 +540,65 @@
 			};
 			name = Release;
 		};
+		D354AD562751ACD600B9A546 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P4LAGJ9JSA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Source/iOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.caughtbyatoe.Sample0-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D354AD572751ACD600B9A546 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P4LAGJ9JSA;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Source/iOS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.caughtbyatoe.Sample0-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -428,11 +611,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D322CEB327407B2B001F4F96 /* Build configuration list for PBXNativeTarget "Sample0" */ = {
+		D322CEB327407B2B001F4F96 /* Build configuration list for PBXNativeTarget "Sample0_macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D322CEB427407B2B001F4F96 /* Debug */,
 				D322CEB527407B2B001F4F96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D354AD552751ACD600B9A546 /* Build configuration list for PBXNativeTarget "Sample0_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D354AD562751ACD600B9A546 /* Debug */,
+				D354AD572751ACD600B9A546 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

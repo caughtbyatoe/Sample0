@@ -1,7 +1,7 @@
 // Copyright (c) 2021 caughtbyatoe
 //
 //  AppDelegate.mm
-//  Sample0
+//  Sample0_macOS
 //
 //
 

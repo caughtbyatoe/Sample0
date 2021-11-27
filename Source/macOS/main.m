@@ -1,11 +1,11 @@
 // Copyright (c) 2021 caughtbyatoe
 //
 //  main.m
-//  Sample0
+//  Sample0_macOS
 //
 //
 
-#import <Cocoa/Cocoa.h>
+#include <Cocoa/Cocoa.h>
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
