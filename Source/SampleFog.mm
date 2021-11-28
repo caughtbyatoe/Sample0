@@ -1,67 +1,18 @@
-// Copyright (c) 2021 caughtbyatoe
+//  Copyright (c) 2021 caughtbyatoe
 //
-//  Scene.cc
+//  SampleFog.mm
 //  Sample0
 //
+//
 
-#include "Scene.h"
+#include "Sample.h"
 
-const Scene simpleQuadScene {
-    /* cam = */ {
-        /* r = */ 2.0,
-        /* phi = */ 90.0,
-        /* theta = */ 90.0,
-        /* fov = */ 65.0,
-        /* near = */ 0.01,
-        /* far = */ 1000.0,
-    },
-    /* vars = */ {
-        /* rMax = */ 10.0,
-        /* worldTrans = */ { 0.0, 0.0, 0.0 },
-        /* worldRot = */ { 0.0, 0.0, 0.0 },
-        /* worldScale = */ { 1.0, 1.0, 1.0 },
-    },
-    /* meshes = */ {
-        /* [0] = */ {
-            /* name = */ "quad0",
-            /* vertTbl = */ {
-                { -0.5, -0.5, 0.0 },
-                {  0.5, -0.5, 0.0 },
-                {  0.5,  0.5, 0.0 },
-                { -0.5,  0.5, 0.0 },
-            },
-            /* vertClr = */ {
-                { 1.0, 0.0, 0.0 },
-                { 0.0, 1.0, 0.0 },
-                { 0.0, 0.0, 1.0 },
-                { 0.5, 0.5, 0.0 },
-            },
-            /* faces = */ {
-                { 0, 1, 2, 3 },
-            },
-        },
-        /* [1] = */ {
-            /* name = */ "quad1",
-            /* vertTbl = */ {
-                {  0.5, -0.5,  0.0 },
-                {  0.5, -0.5, -1.0 },
-                {  0.5,  0.5, -1.0 },
-                {  0.5,  0.5,  0.0 },
-            },
-            /* vertClr = */ {
-                { 1.0, 0.0, 0.0 },
-                { 0.0, 1.0, 0.0 },
-                { 0.0, 0.0, 1.0 },
-                { 0.5, 0.5, 0.0 },
-            },
-            /* faces = */ {
-                { 0, 1, 2, 3 },
-            },
-        },
-    }
-};
+#include "Shaders.h"
+
+#include "ImGui/imgui.h"
 
 const Scene cornellBoxScene {
+    /* name = */ "cornell box",
     /* cam = */ {
         /* r = */ 1500.0,
         /* phi = */ 90.0,
@@ -71,6 +22,7 @@ const Scene cornellBoxScene {
         /* far = */ 10000.0,
     },
     /* vars = */ {
+        /* rMin = */ 1.0,
         /* rMax   = */ 3000.0,
         /* worldTrans = */ { -260.0, -260.0, 0.0 },
         /* worldRot = */ { 0.0, 0.0, 0.0 },
@@ -91,6 +43,7 @@ const Scene cornellBoxScene {
                 { 1.0, 1.0, 1.0 },
                 { 1.0, 1.0, 1.0 },
             },
+            /* vertUvw = */ {},
             /* faces = */ {
                 { 0, 1, 2, 3 }
             }
@@ -109,6 +62,7 @@ const Scene cornellBoxScene {
                 { 0.4, 0.4, 0.4 },
                 { 0.4, 0.4, 0.4 },
             },
+            /* vertUvw = */ {},
             /* faces = */ {
                 { 0, 1, 2, 3 }
             }
@@ -127,6 +81,7 @@ const Scene cornellBoxScene {
                 { 0.6, 0.6, 0.6 },
                 { 0.6, 0.6, 0.6 },
             },
+            /* vertUvw = */ {},
             /* faces = */ {
                 { 0, 1, 2, 3 }
             }
@@ -145,6 +100,7 @@ const Scene cornellBoxScene {
                 { 0.5, 0.5, 0.5 },
                 { 0.5, 0.5, 0.5 },
             },
+            /* vertUvw = */ {},
             /* faces = */ {
                 { 0, 1, 2, 3 }
             }
@@ -163,6 +119,7 @@ const Scene cornellBoxScene {
                 { 0.0, 0.5, 0.0 },
                 { 0.0, 0.5, 0.0 },
             },
+            /* vertUvw = */ {},
             /* quadTbl = */ {
                 { 0, 1, 2, 3 }
             }
@@ -181,6 +138,7 @@ const Scene cornellBoxScene {
                 { 0.5, 0.0, 0.0 },
                 { 0.5, 0.0, 0.0 },
             },
+            /* vertUvw = */ {},
             /* quadTbl = */ {
                 { 0, 1, 2, 3 }
             }
@@ -207,6 +165,7 @@ const Scene cornellBoxScene {
                 { 0.5, 0.5, 0.0 },
                 { 0.5, 0.5, 0.0 },
             },
+            /* vertUvw = */ {},
             /* quadTbl = */ {
                 { 0, 1, 2, 3 },
                 { 4, 3, 2, 5 },
@@ -238,6 +197,7 @@ const Scene cornellBoxScene {
                 { 0.0, 0.0, 0.5 },
                 { 0.0, 0.0, 0.5 },
             },
+            /* vertUvw = */ {},
             /* quadTbl = */ {
                 { 0, 1, 2, 3 },
                 { 4, 3, 2, 5 },
@@ -249,43 +209,166 @@ const Scene cornellBoxScene {
         },
     }
 };
-
-const Scene &getSimpleQuadScene()
-{
-    return simpleQuadScene;
-}
-
-const Scene &getCornellBoxScene()
-{
-    return cornellBoxScene;
-}
-
-static int defaultScene = 0;
-const int numScenes = 2;
-
-const Scene &getDefaultScene()
-{
-    switch (defaultScene) {
-        case 0:
-            return getSimpleQuadScene();
-        case 1:
-            return getCornellBoxScene();
-    };
-    return getSimpleQuadScene();
-}
-
-const char* getDefaultSceneName()
-{
-    switch (defaultScene) {
-        case 0:
-            return "Simple Quads";
-        case 1:
-            return "Cornell Box";
+const Scene openSkyboxScene {
+    /* name = */ "skybox",
+    /* cam = */ {
+        /* r = */ 1500.0,
+        /* phi = */ 90.0,
+        /* theta = */ 90.0,
+        /* fov = */ 65.0,
+        /* near = */ 1.0,
+        /* far = */ 10000.0,
+    },
+    /* vars = */ {
+        /* rMin = */ 10.0,
+        /* rMax = */ 3000.0,
+        /* worldTrans = */ { 0.0, 0.0, 0.0 },
+        /* worldRot = */ { 0.0, 0.0, 0.0 },
+        /* worldScale = */ { 1.0, 1.0, 1.0 },
+    },
+    /* meshes = */ {
+        /* [0] = */ {
+            /* name = */ "quad0",
+            /* vertTbl = */ {
+                { -500.0, -500.0, 0.0 },
+                {  500.0, -500.0, 0.0 },
+                {  500.0,  500.0, 0.0 },
+                { -500.0,  500.0, 0.0 },
+            },
+            /* vertClr = */ {
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+            },
+            /* vertUvw = */ {},
+            /* faces = */ {
+                { 0, 1, 2, 3 },
+            },
+        },
+        /* [1] = */ {
+            /* name = */ "quad1",
+            /* vertTbl = */ {
+                {  500.0, -500.0, 0.0 },
+                {  500.0, -500.0, 500.0 },
+                {  500.0,  500.0, 500.0 },
+                {  500.0,  500.0, 0.0 },
+            },
+            /* vertClr = */ {
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+            },
+            /* vertUvw = */ {},
+            /* faces = */ {
+                { 0, 1, 2, 3 },
+            },
+        },
+        /* [2] = */ {
+            /* name = */ "quad2",
+            /* vertTbl = */ {
+                {  -500.0, -500.0, 0.0 },
+                {  -500.0,  500.0, 0.0 },
+                {  -500.0,  500.0, 500.0 },
+                {  -500.0, -500.0, 500.0 },
+            },
+            /* vertClr = */ {
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+            },
+            /* vertUvw = */ {},
+            /* faces = */ {
+                { 0, 1, 2, 3 },
+            },
+        },
+        /* [3] = */ {
+            /* name = */ "quad3",
+            /* vertTbl = */ {
+                {  -500.0, 500.0, 500.0 },
+                {  -500.0, 500.0, 0.0 },
+                {   500.0, 500.0, 0.0 },
+                {   500.0, 500.0, 500.0 },
+            },
+            /* vertClr = */ {
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+            },
+            /* vertUvw = */ {},
+            /* faces = */ {
+                { 0, 1, 2, 3 },
+            },
+        },
+        /* [4] = */ {
+            /* name = */ "quad4",
+            /* vertTbl = */ {
+                {   500.0, -500.0, 500.0 },
+                {   500.0, -500.0, 0.0 },
+                {  -500.0, -500.0, 0.0 },
+                {  -500.0, -500.0, 500.0 },
+            },
+            /* vertClr = */ {
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+                { 0.28, 0.36, 0.5 },
+            },
+            /* vertUvw = */ {},
+            /* faces = */ {
+                { 0, 1, 2, 3 },
+            },
+        },
     }
-    return "Simple Quads";
+};
+
+static float clearColor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+
+static FogUniforms fogUniforms;
+
+static void encoder(id <MTLRenderCommandEncoder> renderEncoder)
+{
+    static bool firstTime = true;
+    if (firstTime) {
+        fogUniforms.color = simd_make_float3(1.0, 1.0, 1.0);
+        fogUniforms.density = 0.1;
+        fogUniforms.scale = 256.0;
+        fogUniforms.steps = 4;
+        fogUniforms.wind = simd_make_float3(0, 0, 0);
+        fogUniforms.heightMax = 256.0;
+        firstTime = false;
+    }
+    [renderEncoder setFragmentBytes:&fogUniforms length:sizeof(FogUniforms) atIndex:1];
 }
 
-void setNextDefaultScene()
+static void guiDraw()
 {
-    defaultScene = (defaultScene + 1) % numScenes;
+    // fog gui
+    ImGui::ColorEdit3("fog color", (float*) &fogUniforms.color);
+    ImGui::SliderFloat("fog density", &fogUniforms.density, 0.0, 0.2);
+    ImGui::SliderFloat("fog scale", &fogUniforms.scale, 1.0, 1024.0);
+    ImGui::SliderInt("fog steps", &fogUniforms.steps, 1, 256);
+    ImGui::InputFloat3("fog wind", (float*) &fogUniforms.wind);
+    ImGui::InputFloat("fog height max", (float*) &fogUniforms.heightMax);
+}
+
+static const Sample sampleFog {
+    /* sampleName = */ "fog",
+    /* scenes = */ {
+        /* [0] = */ &cornellBoxScene,
+        /* [1] = */ &openSkyboxScene
+    },
+    /* vertexFunctionName = */ "sampleFogVertexShader",
+    /* fragmentFunctionName = */ "sampleFogFragmentShader",
+    /* clearColor = */ clearColor,
+    /* encoderFunction = */ encoder,
+    /* guiFunction = */ guiDraw,
+};
+
+const Sample* getSampleFog()
+{
+    return &sampleFog;
 }

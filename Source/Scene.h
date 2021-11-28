@@ -4,8 +4,7 @@
 //  Sample0
 //
 
-#ifndef Types_h
-#define Types_h
+#pragma once
 
 #include <string>
 #include <vector>
@@ -24,6 +23,13 @@ struct VertexColor
     float b;
 };
 
+struct VertexUvw
+{
+    float u;
+    float v;
+    float w;
+};
+
 struct Face
 {
     int p0;
@@ -37,6 +43,7 @@ struct QuadMesh
     std::string                 name;
     std::vector<VertexPosition> vertTbl;
     std::vector<VertexColor>    vertClr;
+    std::vector<VertexUvw>      vertUvw;
     std::vector<Face>           faces;
 };
 
@@ -52,6 +59,7 @@ struct Camera
 
 struct Variables
 {
+    float rMin;
     float rMax;
     float worldTrans[3];
     float worldRot[3];
@@ -60,15 +68,10 @@ struct Variables
 
 struct Scene
 {
+    std::string name;
     Camera cam;
     Variables vars;
     std::vector<QuadMesh> meshes;
 };
 
-const Scene& getSimpleQuadScene();
-const Scene& getCornellBoxScene();
-const Scene& getDefaultScene();
-const char* getDefaultSceneName();
-void setNextDefaultScene();
 
-#endif /* Scene_h */

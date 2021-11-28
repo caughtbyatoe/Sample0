@@ -29,8 +29,14 @@
 		D354AD612751BA0300B9A546 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D58355274098E700A18526 /* imgui.cpp */; };
 		D354AD622751BA0B00B9A546 /* ImGuizmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D58356274098E700A18526 /* ImGuizmo.cpp */; };
 		D354AD632751BA1A00B9A546 /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D3D58343274080F400A18526 /* Renderer.mm */; };
-		D354AD642751BA2200B9A546 /* Scene.cc in Sources */ = {isa = PBXBuildFile; fileRef = D3D5836C2740A80500A18526 /* Scene.cc */; };
+		D354AD642751BA2200B9A546 /* SampleVertexColor.mm in Sources */ = {isa = PBXBuildFile; fileRef = D3D5836C2740A80500A18526 /* SampleVertexColor.mm */; };
 		D354AD652751BA2A00B9A546 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = D3D58345274083F300A18526 /* Shaders.metal */; };
+		D397506A2752F940000ADD5D /* Sample.mm in Sources */ = {isa = PBXBuildFile; fileRef = D39750692752F940000ADD5D /* Sample.mm */; };
+		D397506B2752F940000ADD5D /* Sample.mm in Sources */ = {isa = PBXBuildFile; fileRef = D39750692752F940000ADD5D /* Sample.mm */; };
+		D397506F27530D2B000ADD5D /* SampleNoise.mm in Sources */ = {isa = PBXBuildFile; fileRef = D397506E27530D2B000ADD5D /* SampleNoise.mm */; };
+		D397507027530D2B000ADD5D /* SampleNoise.mm in Sources */ = {isa = PBXBuildFile; fileRef = D397506E27530D2B000ADD5D /* SampleNoise.mm */; };
+		D397507327532087000ADD5D /* SampleFog.mm in Sources */ = {isa = PBXBuildFile; fileRef = D397507227532087000ADD5D /* SampleFog.mm */; };
+		D397507427532087000ADD5D /* SampleFog.mm in Sources */ = {isa = PBXBuildFile; fileRef = D397507227532087000ADD5D /* SampleFog.mm */; };
 		D3D58344274080F400A18526 /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = D3D58343274080F400A18526 /* Renderer.mm */; };
 		D3D58346274083F300A18526 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = D3D58345274083F300A18526 /* Shaders.metal */; };
 		D3D5835A274098E700A18526 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D5834B274098E700A18526 /* imgui_draw.cpp */; };
@@ -41,7 +47,7 @@
 		D3D5835F274098E700A18526 /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D58354274098E700A18526 /* imgui_tables.cpp */; };
 		D3D58360274098E700A18526 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D58355274098E700A18526 /* imgui.cpp */; };
 		D3D58361274098E700A18526 /* ImGuizmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D3D58356274098E700A18526 /* ImGuizmo.cpp */; };
-		D3D5836D2740A80500A18526 /* Scene.cc in Sources */ = {isa = PBXBuildFile; fileRef = D3D5836C2740A80500A18526 /* Scene.cc */; };
+		D3D5836D2740A80500A18526 /* SampleVertexColor.mm in Sources */ = {isa = PBXBuildFile; fileRef = D3D5836C2740A80500A18526 /* SampleVertexColor.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +72,13 @@
 		D354AD522751ACD600B9A546 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D354AD532751ACD600B9A546 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D354AD582751AF6B00B9A546 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		D39750682752EFC2000ADD5D /* Sample.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sample.h; sourceTree = "<group>"; };
+		D39750692752F940000ADD5D /* Sample.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Sample.mm; sourceTree = "<group>"; };
+		D397506C2752FC0A000ADD5D /* SampleVertexColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleVertexColor.h; sourceTree = "<group>"; };
+		D397506D27530CCD000ADD5D /* SampleNoise.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleNoise.h; sourceTree = "<group>"; };
+		D397506E27530D2B000ADD5D /* SampleNoise.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleNoise.mm; sourceTree = "<group>"; };
+		D397507127532026000ADD5D /* SampleFog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SampleFog.h; sourceTree = "<group>"; };
+		D397507227532087000ADD5D /* SampleFog.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleFog.mm; sourceTree = "<group>"; };
 		D3D583422740807A00A18526 /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		D3D58343274080F400A18526 /* Renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
 		D3D58345274083F300A18526 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
@@ -88,7 +101,7 @@
 		D3D58358274098E700A18526 /* imstb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_truetype.h; sourceTree = "<group>"; };
 		D3D58359274098E700A18526 /* imgui_impl_metal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_metal.h; sourceTree = "<group>"; };
 		D3D583632740A1CB00A18526 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
-		D3D5836C2740A80500A18526 /* Scene.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cc; sourceTree = "<group>"; };
+		D3D5836C2740A80500A18526 /* SampleVertexColor.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleVertexColor.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,7 +151,14 @@
 				D3D583422740807A00A18526 /* Renderer.h */,
 				D3D58343274080F400A18526 /* Renderer.mm */,
 				D3D583632740A1CB00A18526 /* Scene.h */,
-				D3D5836C2740A80500A18526 /* Scene.cc */,
+				D397507127532026000ADD5D /* SampleFog.h */,
+				D397507227532087000ADD5D /* SampleFog.mm */,
+				D397506D27530CCD000ADD5D /* SampleNoise.h */,
+				D397506E27530D2B000ADD5D /* SampleNoise.mm */,
+				D397506C2752FC0A000ADD5D /* SampleVertexColor.h */,
+				D3D5836C2740A80500A18526 /* SampleVertexColor.mm */,
+				D39750682752EFC2000ADD5D /* Sample.h */,
+				D39750692752F940000ADD5D /* Sample.mm */,
 				D3D583472740845900A18526 /* Shaders.h */,
 				D3D58345274083F300A18526 /* Shaders.metal */,
 				D322CEA627407B2A001F4F96 /* ViewController.h */,
@@ -312,15 +332,18 @@
 				D3D58344274080F400A18526 /* Renderer.mm in Sources */,
 				D3D5835B274098E700A18526 /* imgui_impl_osx.mm in Sources */,
 				D322CEA827407B2A001F4F96 /* ViewController.mm in Sources */,
+				D397506B2752F940000ADD5D /* Sample.mm in Sources */,
 				D3D58361274098E700A18526 /* ImGuizmo.cpp in Sources */,
 				D3D5835C274098E700A18526 /* imgui_widgets.cpp in Sources */,
 				D3D5835D274098E700A18526 /* imgui_impl_metal.mm in Sources */,
+				D397507427532087000ADD5D /* SampleFog.mm in Sources */,
 				D3D58360274098E700A18526 /* imgui.cpp in Sources */,
 				D322CEAF27407B2B001F4F96 /* main.m in Sources */,
-				D3D5836D2740A80500A18526 /* Scene.cc in Sources */,
+				D3D5836D2740A80500A18526 /* SampleVertexColor.mm in Sources */,
 				D3D5835A274098E700A18526 /* imgui_draw.cpp in Sources */,
 				D322CEA527407B2A001F4F96 /* AppDelegate.mm in Sources */,
 				D3D5835E274098E700A18526 /* imgui_demo.cpp in Sources */,
+				D397507027530D2B000ADD5D /* SampleNoise.mm in Sources */,
 				D3D5835F274098E700A18526 /* imgui_tables.cpp in Sources */,
 				D3D58346274083F300A18526 /* Shaders.metal in Sources */,
 			);
@@ -331,17 +354,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				D354AD652751BA2A00B9A546 /* Shaders.metal in Sources */,
-				D354AD642751BA2200B9A546 /* Scene.cc in Sources */,
+				D354AD642751BA2200B9A546 /* SampleVertexColor.mm in Sources */,
 				D354AD632751BA1A00B9A546 /* Renderer.mm in Sources */,
+				D397506A2752F940000ADD5D /* Sample.mm in Sources */,
 				D354AD622751BA0B00B9A546 /* ImGuizmo.cpp in Sources */,
 				D354AD5F2751BA0300B9A546 /* imgui_tables.cpp in Sources */,
 				D354AD602751BA0300B9A546 /* imgui_widgets.cpp in Sources */,
+				D397507327532087000ADD5D /* SampleFog.mm in Sources */,
 				D354AD612751BA0300B9A546 /* imgui.cpp in Sources */,
 				D354AD5E2751B9F800B9A546 /* imgui_impl_metal.mm in Sources */,
 				D354AD5C2751B9EF00B9A546 /* imgui_demo.cpp in Sources */,
 				D354AD5D2751B9EF00B9A546 /* imgui_draw.cpp in Sources */,
 				D354AD5B2751B9D100B9A546 /* ViewController.mm in Sources */,
 				D354AD432751ACD500B9A546 /* AppDelegate.m in Sources */,
+				D397506F27530D2B000ADD5D /* SampleNoise.mm in Sources */,
 				D354AD542751ACD600B9A546 /* main.m in Sources */,
 				D354AD462751ACD500B9A546 /* SceneDelegate.m in Sources */,
 			);

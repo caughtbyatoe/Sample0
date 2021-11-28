@@ -10,6 +10,7 @@
 #include "ImGui/imgui_impl_metal.h"
 #include "ImGui/imgui_impl_osx.h"
 #include "ImGui/ImGuizmo.h"
+#include "Sample.h"
 #include "Scene.h"
 #include "Shaders.h"
 
@@ -23,20 +24,26 @@ using simd::float4x4;
     id<MTLRenderPipelineState> _pipeline;
     id<MTLCommandQueue> _commandQueue;
     id<MTLDepthStencilState> _depthState;
+    const Sample* _sample;
     Scene _scene;
+    int _sceneIndex;
+    SceneUniforms _sceneUniforms;
     std::vector<Vertex> _triangleVertexBuffer;
+    std::vector<VertexData> _triangleVertexData;
 }
 
 - (void)loadScene
 {
     // We render using vert colors and triangle soup
-    _scene = getDefaultScene();
+    _scene = *_sample->scenes[_sceneIndex];
     size_t numTris = 0;
     for (QuadMesh& mesh : _scene.meshes) {
         numTris += mesh.faces.size() * 2;
     }
     _triangleVertexBuffer.clear();
     _triangleVertexBuffer.reserve(numTris);
+    _triangleVertexData.clear();
+    _triangleVertexData.reserve(numTris);
     for (QuadMesh& mesh : _scene.meshes) {
         for (Face& face : mesh.faces) {
             const VertexPosition p0 = mesh.vertTbl[face.p0];
@@ -47,20 +54,55 @@ using simd::float4x4;
             const VertexColor c1 = mesh.vertClr[face.p1];
             const VertexColor c2 = mesh.vertClr[face.p2];
             const VertexColor c3 = mesh.vertClr[face.p3];
-            const Vertex v0 = { { p0.x, p0.y, p0.z}, { c0.r, c0.g, c0.b, 1.0 } };
-            const Vertex v1 = { { p1.x, p1.y, p1.z}, { c1.r, c1.g, c1.b, 1.0 } };
-            const Vertex v2 = { { p2.x, p2.y, p2.z}, { c2.r, c2.g, c2.b, 1.0 } };
-            const Vertex v3 = { { p3.x, p3.y, p3.z}, { c3.r, c3.g, c3.b, 1.0 } };
+            // default uvs are probably not what you want
+            const VertexUvw uv0 = mesh.vertUvw.size() ? mesh.vertUvw[face.p0] : VertexUvw { 0.0, 0.0, 0.0 };
+            const VertexUvw uv1 = mesh.vertUvw.size() ? mesh.vertUvw[face.p1] : VertexUvw { 1.0, 0.0, 0.0 };
+            const VertexUvw uv2 = mesh.vertUvw.size() ? mesh.vertUvw[face.p2] : VertexUvw { 1.0, 1.0, 0.0 };
+            const VertexUvw uv3 = mesh.vertUvw.size() ? mesh.vertUvw[face.p3] : VertexUvw { 0.0, 1.0, 0.0 };
+            const Vertex v0 = { { p0.x, p0.y, p0.z} };
+            const Vertex v1 = { { p1.x, p1.y, p1.z} };
+            const Vertex v2 = { { p2.x, p2.y, p2.z} };
+            const Vertex v3 = { { p3.x, p3.y, p3.z} };
+            const VertexData d0 = { { c0.r, c0.g, c0.b, 1.0 }, { uv0.u, uv0.v, uv0.w } };
+            const VertexData d1 = { { c1.r, c1.g, c1.b, 1.0 }, { uv1.u, uv1.v, uv1.w } };
+            const VertexData d2 = { { c2.r, c2.g, c2.b, 1.0 }, { uv2.u, uv2.v, uv2.w } };
+            const VertexData d3 = { { c3.r, c3.g, c3.b, 1.0 }, { uv3.u, uv3.v, uv3.w } };
             // tri 1
             _triangleVertexBuffer.push_back(v0);
             _triangleVertexBuffer.push_back(v1);
             _triangleVertexBuffer.push_back(v3);
+            _triangleVertexData.push_back(d0);
+            _triangleVertexData.push_back(d1);
+            _triangleVertexData.push_back(d3);
             // tri 2
             _triangleVertexBuffer.push_back(v3);
             _triangleVertexBuffer.push_back(v1);
             _triangleVertexBuffer.push_back(v2);
+            _triangleVertexData.push_back(d3);
+            _triangleVertexData.push_back(d1);
+            _triangleVertexData.push_back(d2);
         }
     }
+}
+
+- (void)makePipeline:(MTKView *)mtkView
+{
+    NSString* vertexFunctionName = [NSString stringWithUTF8String:_sample->vertexFunctionName];
+    NSString* fragmentFunctionName = [NSString stringWithUTF8String:_sample->fragmenFunctionName];
+
+    id<MTLLibrary> defaultLibrary = [_device newDefaultLibrary];
+    id<MTLFunction> vertexFunction = [defaultLibrary newFunctionWithName:vertexFunctionName];
+    id<MTLFunction> fragmentFunction = [defaultLibrary newFunctionWithName:fragmentFunctionName];
+    // Configure a pipeline descriptor that is used to create a pipeline state.
+    MTLRenderPipelineDescriptor *pipelineDescriptor = [[MTLRenderPipelineDescriptor alloc] init];
+    pipelineDescriptor.vertexFunction = vertexFunction;
+    pipelineDescriptor.fragmentFunction = fragmentFunction;
+    pipelineDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat;
+    pipelineDescriptor.depthAttachmentPixelFormat = mtkView.depthStencilPixelFormat;
+    NSError *error = nil;
+    _pipeline = [_device newRenderPipelineStateWithDescriptor:pipelineDescriptor
+                                                        error:&error];
+    NSAssert(_pipeline, @"Failed to create pipeline: %@", error);
 }
 
 - (nonnull instancetype)initWithMetalKitView:(MTKView *)mtkView
@@ -68,29 +110,22 @@ using simd::float4x4;
     self = [super init];
     if (self) {
         _device = mtkView.device;
+        _sample = getNextSample();
+        _sceneIndex = 0;
 
         mtkView.depthStencilPixelFormat = MTLPixelFormatDepth32Float;
         mtkView.clearDepth = 1.0;
 
-        id<MTLLibrary> defaultLibrary = [_device newDefaultLibrary];
-        id<MTLFunction> vertexFunction = [defaultLibrary newFunctionWithName:@"vertexShader"];
-        id<MTLFunction> fragmentFunction = [defaultLibrary newFunctionWithName:@"fragmentShader"];
-        // Configure a pipeline descriptor that is used to create a pipeline state.
-        MTLRenderPipelineDescriptor *pipelineDescriptor = [[MTLRenderPipelineDescriptor alloc] init];
-        pipelineDescriptor.vertexFunction = vertexFunction;
-        pipelineDescriptor.fragmentFunction = fragmentFunction;
-        pipelineDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat;
-        pipelineDescriptor.depthAttachmentPixelFormat = mtkView.depthStencilPixelFormat;
-        NSError *error = nil;
-        _pipeline = [_device newRenderPipelineStateWithDescriptor:pipelineDescriptor
-                                                            error:&error];
-        NSAssert(_pipeline, @"Failed to create pipeline: %@", error);
+        [self makePipeline:mtkView];
         
         MTLDepthStencilDescriptor *depthDescriptor = [MTLDepthStencilDescriptor new];
         depthDescriptor.depthCompareFunction = MTLCompareFunctionLess;
         depthDescriptor.depthWriteEnabled = YES;
         _depthState = [_device newDepthStencilStateWithDescriptor:depthDescriptor];
         NSAssert(_depthState, @"Failed to create depth state");
+
+        _sceneUniforms.eyePos = simd_make_float3(0, 0, 0);
+        _sceneUniforms.frame = 0;
 
         _commandQueue = [_device newCommandQueue];
         
@@ -148,14 +183,19 @@ static float4x4 lookAt(float3 eye, float3 target, float3 up)
     return rInv * tInv;
 }
 
-static float4x4 computeOrbitViewMat(float r, float phi, float theta)
+static float3 computeCameraLocation(float r, float phi, float theta)
 {
-    const float3 target { 0.0f, 0.0f, 0.0f };
     const float cosPhi = cosf(phi * M_PI / 180.0f);
     const float sinPhi = sinf(phi * M_PI / 180.0f);
     const float cosTheta = cosf(theta * M_PI / 180.0f);
     const float sinTheta = sinf(theta * M_PI / 180.0f);
     const float3 eye { r * sinTheta * cosPhi, r * cosTheta, r * sinTheta * sinPhi };
+    return eye;
+}
+
+static float4x4 computeOrbitViewMat(float3 eye)
+{
+    const float3 target { 0.0f, 0.0f, 0.0f };
     const float3 up { 0.0f, 1.0f, 0.0f };
     return lookAt(eye, target, up);
 }
@@ -182,7 +222,7 @@ static float4x4 computeModelMatrix(const float *tran, const float *rot, const fl
     
     id<MTLCommandBuffer> commandBuffer = [_commandQueue commandBuffer];
 
-    static float clear_color[4] = { 0.28f, 0.36f, 0.5f, 1.0f };
+    const float *clearColor = _sample->clearColor;
 
     float& r = _scene.cam.r;
     float& phi = _scene.cam.phi;
@@ -193,7 +233,9 @@ static float4x4 computeModelMatrix(const float *tran, const float *rot, const fl
         (float4) { 0.0f,  0.0f, 1.0f, 0.0f },
         (float4) { 0.0f,  0.0f, -r,   1.0f }
     };
-    viewMat = computeOrbitViewMat(r, phi, theta);
+    _sceneUniforms.eyePos = computeCameraLocation(r, phi, theta);
+    ++_sceneUniforms.frame;
+    viewMat = computeOrbitViewMat(_sceneUniforms.eyePos);
     const float fov = _scene.cam.fov;
     const float near = _scene.cam.near;
     const float far = _scene.cam.far;
@@ -216,7 +258,7 @@ static float4x4 computeModelMatrix(const float *tran, const float *rot, const fl
     MTLRenderPassDescriptor* renderPassDescriptor = view.currentRenderPassDescriptor;
     if (!renderPassDescriptor) return;
     
-    renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(clear_color[0] * clear_color[3], clear_color[1] * clear_color[3], clear_color[2] * clear_color[3], clear_color[3]);
+    renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(clearColor[0] * clearColor[3], clearColor[1] * clearColor[3], clearColor[2] * clearColor[3], clearColor[3]);
     
     id <MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
     
@@ -248,7 +290,19 @@ static float4x4 computeModelMatrix(const float *tran, const float *rot, const fl
     [renderEncoder setVertexBytes:triangleVertices
                            length:sizeofTriangleVertices
                           atIndex:VertexInputIndexVertices];
+
+    const VertexData* triangleData = _triangleVertexData.data();
+    const size_t numData = _triangleVertexData.size();
+    const size_t sizeofTriangleData = numData * sizeof(VertexData);
+
+    [renderEncoder setVertexBytes:triangleData
+                           length:sizeofTriangleData
+                          atIndex:VertexInputIndexVertexData];
+
+    [renderEncoder setFragmentBytes:&_sceneUniforms length:sizeof(SceneUniforms) atIndex:FragmentInputIndexSceneUniforms];
     
+    // call sample specific encoder
+    _sample->encoderFunction(renderEncoder);
     
     // Draw the triangles
     [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle
@@ -265,11 +319,11 @@ static float4x4 computeModelMatrix(const float *tran, const float *rot, const fl
     ImGuizmo::SetOrthographic(false);
     ImGuizmo::SetRect(0, 0, width, height);
 
-    ImGui::SliderFloat("Camera R", &r, 0.5, _scene.vars.rMax);
+    ImGui::SliderFloat("Camera R", &r, _scene.vars.rMin, _scene.vars.rMax);
     ImGui::SliderFloat("Camera phi", &phi, 0.0, 359.0);
     ImGui::SliderFloat("Camera theta", &theta, 0.0, 180.0);
     if (ImGui::Button("Reset Camera")) {
-        _scene.cam = getDefaultScene().cam;
+        _scene.cam = _sample->scenes[_sceneIndex]->cam;
     }
 
     ImGui::InputFloat3("World Translation", tran);
@@ -278,9 +332,9 @@ static float4x4 computeModelMatrix(const float *tran, const float *rot, const fl
     if (ImGui::Button("Reset World")) {
         manipMode = MANIP_NONE;
         for (int i = 0; i < 3; ++i) {
-            tran[i] = getDefaultScene().vars.worldTrans[i];
-            rot[i] = getDefaultScene().vars.worldRot[i];
-            scale[i] = getDefaultScene().vars.worldScale[i];
+            tran[i] = _sample->scenes[_sceneIndex]->vars.worldTrans[i];
+            rot[i] = _sample->scenes[_sceneIndex]->vars.worldRot[i];
+            scale[i] = _sample->scenes[_sceneIndex]->vars.worldScale[i];
         }
     }
     ImGui::RadioButton("No Manipulator", &manipMode, MANIP_NONE);
@@ -295,11 +349,19 @@ static float4x4 computeModelMatrix(const float *tran, const float *rot, const fl
         ImGuizmo::Manipulate((const float*)&viewMat, (const float*)&projMat, op, mode, (float*)&modelMat);
         ImGuizmo::DecomposeMatrixToComponents((const float*)&modelMat, tran, rot, scale);
     }
-    ImGui::Text("Current Scene: %s", getDefaultSceneName());
+    ImGui::Text("Current Sample: %s", _sample->sampleName);
+    bool nextSample = false;
+    if (ImGui::Button("Next Sample")) {
+        nextSample = true;
+    }
+    ImGui::Text("Current Scene: %s", _scene.name.c_str());
     if (ImGui::Button("Next Scene")) {
-        setNextDefaultScene();
+        _sceneIndex = (_sceneIndex + 1) % _sample->scenes.size();
         [self loadScene];
     }
+    
+    // call sample specific gui
+    _sample->guiFunction();
 
     ImGui::Render();
     ImDrawData *drawData = ImGui::GetDrawData();
@@ -310,6 +372,13 @@ static float4x4 computeModelMatrix(const float *tran, const float *rot, const fl
     [commandBuffer presentDrawable:view.currentDrawable];
 
     [commandBuffer commit];
+    
+    if (nextSample) {
+        _sample = getNextSample();
+        _sceneIndex = 0;
+        [self makePipeline:view];
+        [self loadScene];
+    }
 }
 
 - (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size
